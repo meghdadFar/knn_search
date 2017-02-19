@@ -1,7 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright (C) 2017 Meghdad Farahmand<meghdad.farahmand@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package unige.cui.meghdad.knnsearch;
 
@@ -82,9 +94,16 @@ public class ReadAndFilterWordRep {
         }
         return v.toString();
     }
-    
-    
-    
+    /**
+     * 
+     * @param path2VecRep
+     * @param length
+     * @param genOutput
+     * @param p2output
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     
     public List rfwr(String path2VecRep,int length,boolean genOutput,String p2output) throws FileNotFoundException, IOException {
 
@@ -137,8 +156,6 @@ public class ReadAndFilterWordRep {
         
         String unkVec = randomVecGenerator(length);
         
-        
-        
         words.add("unk");
         vectors.add(unkVec);
         
@@ -188,7 +205,6 @@ public class ReadAndFilterWordRep {
         returnLists.add(words);
         returnLists.add(vectors);
         return returnLists;
-
     }
 
     
@@ -196,13 +212,9 @@ public class ReadAndFilterWordRep {
      * Overloaded version of rfwr for when the output
      * file is not desired. 
     */
-
         public List rfwr(String path2VecRep,int length) throws FileNotFoundException, IOException {
-
         //String p2NCs2BeUsedForDic = path2Home+"/Resources/corpora/WIKI-2015/important/test_data/nc.gt5.txt";
         //String path2VecRep= path2Home+"/Resources/corpora/WIKI-2015/vectors_"+embeddings+"/vectors.WIKI15.lowerC.iter30.size50.BOW.txt";
-        
-
         /*
          Reading the representation File that has the following format:
         
@@ -227,11 +239,8 @@ public class ReadAndFilterWordRep {
          */
         List<String> words = new ArrayList<String>();
         List<String> vectors = new ArrayList<String>();
-
         
         String unkVec = randomVecGenerator(length);
-        
-        
         
         words.add("unk");
         vectors.add(unkVec);
@@ -251,22 +260,13 @@ public class ReadAndFilterWordRep {
             Matcher w2vecM = w2vec.matcher(l);
 
             if (w2vecM.find()) {
-
                 //to create the output solely based on the pattern (and not toBeUsedForDic)
                 words.add(w2vecM.group(1));
                 vectors.add(w2vecM.group(2));
-
-
             }
-
         }
-
         returnLists.add(words);
         returnLists.add(vectors);
         return returnLists;
-
     }
-
-    
-    
 }

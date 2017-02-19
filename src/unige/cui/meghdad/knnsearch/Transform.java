@@ -1,7 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright (C) 2017 Meghdad Farahmand<meghdad.farahmand@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package unige.cui.meghdad.knnsearch;
 
@@ -15,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Transform contains methods that are required to transform vectors. 
+ * This class contains methods that are required to transform vectors. 
  * 
  * For instance transforming a vector of strings to a vector of doubles. 
  *
@@ -26,8 +38,6 @@ import java.util.List;
  *
  */
 public class Transform {
-
-
     /**
      * Create matrix (list<list<Double>>) from file.
      *
@@ -97,16 +107,26 @@ public class Transform {
          */
         
         List<List<Double>> matrix = new ArrayList<>();
+        String row;
+        String[] elements;
+        
+        
+        System.out.println("Number of elements to be processed: "+vectors.size());
         
         for (int i = 0; i < vectors.size(); i++) {
-            String row = vectors.get(i);
-
-            String[] elements = row.split(" ");
+            
+            if(i % 100000 == 0){
+                System.out.println("row: "+i);
+            }
+            
+            row = vectors.get(i);
+            elements = row.split(" ");
 
             if (elements.length != length) {
                 System.out.println("matrix cannnot be created.");
-                System.out.println("number of columns mismatch at row " + (i + 1) + ".");
-                System.out.println("returning.");
+                System.out.println("number of columns mismatch the input argument length at row " + (i + 1) + ".");
+                System.out.println("argument length: "+length +" number of columns: "+elements.length);
+                System.out.println("returning null.");
                 return null;
             }
             List<Double> tmp = new ArrayList<>();
@@ -115,11 +135,12 @@ public class Transform {
             }
             matrix.add(tmp);
         }
+//        for(List l : matrix){
+//            System.out.println(l);
+//        }
         return matrix;
     }
 
-    
-    
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
         Transform m = new Transform();

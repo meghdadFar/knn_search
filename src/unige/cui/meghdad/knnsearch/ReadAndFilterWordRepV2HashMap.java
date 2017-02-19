@@ -1,7 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright (C) 2017 Meghdad Farahmand<meghdad.farahmand@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package unige.cui.meghdad.knnsearch;
 
@@ -26,8 +38,8 @@ import java.util.regex.Pattern;
  * on some regex criteria and return a list of words and a list of their representations
  * with corresponding indices. 
  * 
- * Two overloaded rfwr methods implement this program. The first one genreates two 
- output files (words.txt and vectors.txt) and a List<List<String>> that consists of 
+ * Two overloaded rfwr methods implement the program logic. The first one genreates two 
+ * output files (words.txt and vectors.txt) and the second one a List<List<String>> that consists of 
  * words and vectors. 
  * 
  * @author Meghdad Farahmand<meghdad.farahmand@gmail.com>
@@ -35,11 +47,8 @@ import java.util.regex.Pattern;
  * 
  * 
  * 
- * 
  */
 public class ReadAndFilterWordRepV2HashMap {
-
-    
     /**
      * Method to create a vector of size "length" of random reals between -5 and 5.
      * 
@@ -60,8 +69,6 @@ public class ReadAndFilterWordRepV2HashMap {
         }
         return v.toString();
     }
-    
-    
     /**
      * Main method of ReadAndFilterWordRep. See the description of ReadAndFilterWordRep.
      * 
@@ -115,9 +122,7 @@ public class ReadAndFilterWordRepV2HashMap {
         BufferedReader representationFile = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(path2VecRep)));
-
         /*
-        
          wrdsVectors Keys acontains the filtered w2vec words. 
           wrdsVectors Values vectors acontains the filtered w2vec vectors.
         
@@ -129,22 +134,11 @@ public class ReadAndFilterWordRepV2HashMap {
          to a dummy vector (average of 18000 first vectors). 
         
          */
-        
-        
-        
         HashMap<String,String> wrdsVectors= new HashMap<>();
-        
-
         //////words.add("unk");
-        
         String unkVec = randomVecGenerator(length);
-        
         //////vectors.add(unkVec);
-        
-        
         wrdsVectors.put("unk", unkVec);
-        
-        
         if (genOutput) {
             w2vec_word_out.write("unk\n");
             w2vec_vec_out.write(unkVec+"\n");
@@ -182,8 +176,6 @@ public class ReadAndFilterWordRepV2HashMap {
         }
         return wrdsVectors;
     }
-
-    
     /*
      * Overloaded version of rfwr for when the output
      * file is not desired. 
@@ -192,9 +184,6 @@ public class ReadAndFilterWordRepV2HashMap {
 
         //String p2NCs2BeUsedForDic = path2Home+"/Resources/corpora/WIKI-2015/important/test_data/nc.gt5.txt";
         //String path2VecRep= path2Home+"/Resources/corpora/WIKI-2015/vectors_"+embeddings+"/vectors.WIKI15.lowerC.iter30.size50.BOW.txt";
-
-        
-
         /*
          Reading the representation File that has the following format:
         
@@ -207,7 +196,6 @@ public class ReadAndFilterWordRepV2HashMap {
                         new FileInputStream(path2VecRep)));
 
         /*
-        
          wrdsVectors Keys acontains the filtered w2vec words. 
          wrdsVectors Values vectors acontains the filtered w2vec vectors.
         
@@ -220,21 +208,11 @@ public class ReadAndFilterWordRepV2HashMap {
         
          */
         
-        
-        
         HashMap<String,String> wrdsVectors= new HashMap<>();
-        
-
         //////words.add("unk");
-        
         String unkVec = randomVecGenerator(length);
-        
         //////vectors.add(unkVec);
-        
-        
         wrdsVectors.put("unk", unkVec);
-        
-        
 
         //return maps
         List<List<String>> returnLists = new ArrayList<>();
@@ -249,15 +227,10 @@ public class ReadAndFilterWordRepV2HashMap {
         while ((l = representationFile.readLine()) != null) {
 
             Matcher w2vecM = w2vec.matcher(l);
-
         }
         return wrdsVectors;
     }
-    
-    
     public static void main(String[] args) {
-        
-        
         
     }
     
